@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Algoritmos de Complejidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="all-page">
+        <div class="text">
+            <h1>Análisis de complejidad</h1>
+        </div>
+        <div class="box">
+            <button id="addLinkedList-btn">add LinkedList</button>
+            <button id="addArray-btn">add ArrayList</button>
+        </div>
+        <div class="boxInput-comboBox">
+            <div class="box-comboBox">
+                <button id="searchArray-btn">Array</button>
+                <button id="searchLinkedList-btn">LinkedList</button>
+            </div>
+            <div class="box-comboBox">
+                <input type="text" placeholder="Search" id="search-ipt">
+            </div>
+        </div>
+        <div class="btn-ordenamient">
+            <button id="bubbleSort-btn">BubbleArray</button>
+            <button id="mergeSort-btn">MergeArray</button>
+            <button id="radixSort-btn">RadixArray</button>
+            <button id="bubbleSortLinked-btn">BubbleLinked</button>
+            <button id="mergeSortLinked-btn">MergeLinked</button>
+            <button id="radixSortLinked-btn">RadixLinked</button>
+        </div>
+        <div class="grafica">
+            <canvas id="MiGrafica"></canvas>
+        </div>
+    </div>
+
+    <script>
+        let miCanvas = document.getElementById("MiGrafica").getContext("2d");
+        var chart  = new Chart(miCanvas, {
+            type: 'bar',
+            data: {
+                labels: ["vino", "tequila", "cerveza"],
+                datasets: [{
+                    label: 'Tiempo de ejecución',
+                    data: [10, 20, 30], 
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe']
+                }]
+            }                
+        });
+    </script>
+    <ul id="list-bussines"></ul>
+    <script src="src/controllers/script.js" type="module"></script>
+</body>
+</html>
