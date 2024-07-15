@@ -1,0 +1,6 @@
+# Ignorar el archivo bussines.json
+bussines.json
+
+# Otros patrones de archivos que desees ignorar, por ejemplo:
+node_modules/
+.DS_Store
