@@ -2,5 +2,6 @@
 bussines.json
 
 # Otros patrones de archivos que desees ignorar, por ejemplo:
-node_modules/
+node_modulgit push origin --force --all
+es/
 .DS_Store
