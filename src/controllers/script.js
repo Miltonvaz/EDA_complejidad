@@ -1,139 +1,213 @@
-import Linked from "../models/Linked.js";
+import Linked from "../models/LinkedList/Linked.js"
 import Array from "../models/Array/Array.js";
-
-let root = document.getElementById("list-bussines")
-fetch("./bussines.json")
-.then(response => response.json())
-.then(data => {
-    
-    for (let x=0;x<100;x++) {
-        let item = document.createElement("li");
-        item.textContent = data[x].name;
-        root.appendChild(item)
-    }
-})
-.catch(err => console.log(err))
-
-let addLinkedList = document.getElementById("addLinkedList-btn");
-let addArrayList = document.getElementById("addArray-btn");
-let searchArrayList = document.getElementById("searchArray-btn");
-let searchLinkedList = document.getElementById("searchLinkedList-btn");
-let searchInput = document.getElementById("search-ipt");
-let burbbleOrdenamientArray = document.getElementById("bubbleSort-btn");
-let mergeOrdenamientArray = document.getElementById("mergeSort-btn");
-let radixOrdenamientArray = document.getElementById("radixSort-btn");
-let burbbleOrdenamientLinked = document.getElementById("bubbleSortLinked-btn");
-let mergeOrdenamientLinked = document.getElementById("mergeSortLinked-btn");
-let radixOrdenamientLinked = document.getElementById("radixSortLinked-btn");
+import Grafica from "../models/Grafica.js";
 
 let arrayList = new Array();
 let linkedList = new Linked();
+let grafica = new Grafica();
 
-addLinkedList.addEventListener("click", () =>{
-    let root = document.getElementById("list-bussines")
-    fetch("./bussines.json")
-    .then(response => response.json())
-    .then(data => {
-        
-        for (let x=0;x<100;x++) {
-            let item = document.createElement("li");
-            item.textContent = data[x].name;
-            root.appendChild(item)
-            linkedList.push(item.textContent)
-            console.log(item)
-            console.log("agregado a la linkedlist")
-        }
-    })
-    .catch(err => console.log(err))
-    Swal.fire("Agregado a la linkedlist");
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const addLinkedList = document.getElementById("addLinkedList-btn");
+    const addArrayList = document.getElementById("addArray-btn");
+    const searchArrayList = document.getElementById("searchArray-btn");
+    const searchLinkedList = document.getElementById("searchLinkedList-btn");
+    const searchInput = document.getElementById("search-ipt");
+    const bubbleSortArray = document.getElementById("bubbleSort-btn");
+    const mergeSortArray = document.getElementById("mergeSort-btn");
+    const radixSortArray = document.getElementById("radixSort-btn");
+    const bubbleSortLinkedList = document.getElementById("bubbleSortLinked-btn");
+    const mergeSortLinkedList = document.getElementById("mergeSortLinked-btn");
+    const radixSortLinkedList = document.getElementById("radixSortLinked-btn");
 
-addArrayList.addEventListener("click", () =>{
-    let root = document.getElementById("list-bussines")
-fetch("./bussines.json")
-.then(response => response.json())
-.then(data => {
-    
-    for (let x=0;x<100;x++) {
-        let item = document.createElement("li");
-        item.textContent = data[x].name;
-        root.appendChild(item)
-        arrayList.push(item.textContent)
-        console.log(item)
-        console.log("agregado al array")
-    }
-})
-.catch(err => console.log(err))
-    Swal.fire("Agregado al Array");
-})
+    const calcularTiempo = (start, end) => {
+        return ((end - start) / 1000).toFixed(4); 
+    };
 
-searchArrayList.addEventListener("click", () => {
-    let searchTerm = searchInput.value;
-    if (arrayList.linearSearch(searchTerm)) {
-        Swal.fire(`Se encontró el elemento "${searchTerm}" en el ArrayList`);
-    } else {
-        Swal.fire(`No se encontró el elemento "${searchTerm}" en el ArrayList`);
-    }
-});
+    const actualizarGrafica = () => {
+        grafica.actualizarGrafica();
+    };
 
-searchLinkedList.addEventListener("click", () => {
-    let searchTerm = searchInput.value;
-    if (linkedList.linearSearch(searchTerm)) {
-        Swal.fire(`Se encontró el elemento "${searchTerm}" en la LinkedList`);
-    } else {
-        Swal.fire(`No se encontró el elemento "${searchTerm}" en la LinkedList`);
-    }
-});
-burbbleOrdenamientArray.addEventListener("click", () => {
-    if(arrayList.length === 0) {
-        console.log("No hay elementos en el array.");
-    } else {
-        let { sortedArray, iterations } = arrayList.bubbleSort();
-        console.log("ArrayList ordenado:", sortedArray);
-        Swal.fire({
-            title: "Ordenado con burbuja",
-            html: `Array ordenado: <pre>${JSON.stringify(sortedArray, null, 2)}</pre>`,
-            icon: "success"
-        });
-    }
-});
-mergeOrdenamientArray.addEventListener("click", ()=>{
-    if (arrayList.length === 0) {
-        console.log("No hay elementos en el array.");
-    } else {
-        let { sortedArray, iterations } = arrayList.mergeSort();
-        console.log("ArrayList ordenado:", sortedArray);
-        Swal.fire({
-            title: "Ordenado con merge sort",
-            html: `Array ordenado: <pre>${JSON.stringify(sortedArray, null, 2)}</pre>`,
-            icon: "success"
-        });
-    }
-})
-radixOrdenamientArray.addEventListener("click", () =>{
-    if (arrayList.length === 0) {
-        console.log("No hay elementos en el array.");
-    } else {
-        let { sortedArray, iterations } = arrayList.radixSort();
-        console.log("ArrayList ordenado:", sortedArray);
-        Swal.fire({
-            title: "Ordenado con radix sort",
-            html: `Array ordenado: <pre>${JSON.stringify(sortedArray, null, 2)}</pre>`,
-            icon: "success"
-        });
-    }
-})
-burbbleOrdenamientLinked.addEventListener("click", () => {
-    if (linkedList.length === 0) {
-        console.log("No hay elementos en la LinkedList.");
+    addLinkedList.addEventListener("click", () => {
+        fetch("./bussines.json")
+            .then(response => response.json())
+            .then(data => {
+                const start = performance.now();
+                for (let x = 0; x < 100; x++) {
+                    linkedList.push(data[x].name);
+                }
+                const end = performance.now();
+                const tiempo = calcularTiempo(start, end);
+                console.log(`Tiempo total para agregar en LinkedList: ${tiempo} segundos`);
+                Swal.fire("Agregado a la LinkedList");
+
+                grafica.setData(
+                    'Inserción LinkedList',
+                    { label: 'LinkedList', data: [tiempo], backgroundColor: '#ff6384' }
+                );
+                actualizarGrafica();
+            })
+            .catch(err => console.error(err));
+    });
+
+    addArrayList.addEventListener("click", () => {
+        fetch("./bussines.json")
+            .then(response => response.json())
+            .then(data => {
+                const start = performance.now();
+                for (let x = 0; x < 100; x++) {
+                    arrayList.push(data[x].name);
+                }
+                const end = performance.now();
+                const tiempo = calcularTiempo(start, end);
+                console.log(`Tiempo total para agregar en ArrayList: ${tiempo} segundos`);
+                Swal.fire("Agregado al Array");
+
+                grafica.setData(
+                    'Inserción Array',
+                    { label: 'Array', data: [tiempo], backgroundColor: '#36a2eb' }
+                );
+                actualizarGrafica();
+            })
+            .catch(err => console.error(err));
+    });
+
+    searchArrayList.addEventListener("click", () => {
+        const searchValue = searchInput.value;
+        const start = performance.now();
+        const found = arrayList.linearSearch(searchValue);
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+
+        if (found) {
+            Swal.fire(`Valor encontrado en el Array. Tiempo de búsqueda: ${tiempo} segundos.`);
         } else {
-            let { sortedLinkedList, iterations } = linkedList.bubbleSort();
-            console.log("LinkedList ordenado:", sortedLinkedList);
-            Swal.fire({
-                title: "Ordenado con burbuja",
-                html: `LinkedList ordenado: <pre>${JSON.stringify(sortedLinkedList, null, 2
-                    )}</pre>`
-                    });
-    }
-});
+            Swal.fire(`Valor no encontrado en el Array. Tiempo de búsqueda: ${tiempo} segundos.`);
+        }
 
+        grafica.setData(
+            'Búsqueda Array',
+            { label: 'Búsqueda Array', data: [tiempo], backgroundColor: '#FFCE56' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para búsqueda en Array: ${tiempo} segundos`);
+    });
+
+    searchLinkedList.addEventListener("click", () => {
+        const searchValue = searchInput.value;
+        const start = performance.now();
+        const found = linkedList.linearSearch(searchValue);
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+
+        if (found) {
+            Swal.fire(`Valor encontrado en la LinkedList. Tiempo de búsqueda: ${tiempo} segundos.`);
+        } else {
+            Swal.fire(`Valor no encontrado en la LinkedList. Tiempo de búsqueda: ${tiempo} segundos.`);
+        }
+
+        grafica.setData(
+            'Búsqueda LinkedList',
+            { label: 'Búsqueda LinkedList', data: [tiempo], backgroundColor: '#FF6384' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para búsqueda en LinkedList: ${tiempo} segundos`);
+    });
+
+    bubbleSortArray.addEventListener("click", () => {
+        const start = performance.now();
+        arrayList.bubbleSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Bubble Sort en Array completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Bubble Sort Array',
+            { label: 'Bubble Sort Array', data: [tiempo], backgroundColor: '#FF6384' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Bubble Sort en Array: ${tiempo} segundos`);
+    });
+
+    mergeSortArray.addEventListener("click", () => {
+        const start = performance.now();
+        arrayList.mergeSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Merge Sort en Array completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Merge Sort Array',
+            { label: 'Merge Sort Array', data: [tiempo], backgroundColor: '#36A2EB' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Merge Sort en Array: ${tiempo} segundos`);
+    });
+
+    radixSortArray.addEventListener("click", () => {
+        const start = performance.now();
+        arrayList.radixSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Radix Sort en Array completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Radix Sort Array',
+            { label: 'Radix Sort Array', data: [tiempo], backgroundColor: '#FFCE56' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Radix Sort en Array: ${tiempo} segundos`);
+    });
+
+    bubbleSortLinkedList.addEventListener("click", () => {
+        const start = performance.now();
+        linkedList.bubbleSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Bubble Sort en LinkedList completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Bubble Sort LinkedList',
+            { label: 'Bubble Sort LinkedList', data: [tiempo], backgroundColor: '#FF6384' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Bubble Sort en LinkedList: ${tiempo} segundos`);
+    });
+
+    mergeSortLinkedList.addEventListener("click", () => {
+        const start = performance.now();
+        linkedList.mergeSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Merge Sort en LinkedList completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Merge Sort LinkedList',
+            { label: 'Merge Sort LinkedList', data: [tiempo], backgroundColor: '#36A2EB' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Merge Sort en LinkedList: ${tiempo} segundos`);
+    });
+
+    radixSortLinkedList.addEventListener("click", () => {
+        const start = performance.now();
+        linkedList.radixSort();
+        const end = performance.now();
+        const tiempo = calcularTiempo(start, end);
+        Swal.fire(`Radix Sort en LinkedList completado. Tiempo de ordenamiento: ${tiempo} segundos.`);
+
+        grafica.setData(
+            'Radix Sort LinkedList',
+            { label: 'Radix Sort LinkedList', data: [tiempo], backgroundColor: '#FFCE56' }
+        );
+        actualizarGrafica();
+
+        console.log(`Tiempo total para Radix Sort en LinkedList: ${tiempo} segundos`);
+    });
+});

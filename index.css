@@ -95,17 +95,14 @@ select {
 }
 
 #grafica {
-    width: 100px; /* Ajusta el ancho del canvas aquí */
-    height: 200px; /* Ajusta la altura del canvas aquí */
+    width: 100px; 
+    height: 200px; 
 }
 .grafica {
-    width: 600px;
-    height: auto;
+    width: 800px; 
+    height: 600px; 
     display: flex;
     justify-content: center;
-    padding: 20px;
-}
-.box-comboBox{
-    display: flex;
-    padding: 13px;
+    align-items: center;
+    padding: 20px; 
 }

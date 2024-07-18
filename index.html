@@ -7,8 +7,9 @@
     <title>Algoritmos de Complejidad</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
-<body>
+<body>  
     <div class="all-page">
         <div class="text">
             <h1>Análisis de complejidad</h1>
@@ -35,25 +36,10 @@
             <button id="radixSortLinked-btn">RadixLinked</button>
         </div>
         <div class="grafica">
-            <canvas id="MiGrafica"></canvas>
+            <canvas id="MiGrafica" width="1000" height="700"></canvas>
+
         </div>
     </div>
-
-    <script>
-        let miCanvas = document.getElementById("MiGrafica").getContext("2d");
-        var chart  = new Chart(miCanvas, {
-            type: 'bar',
-            data: {
-                labels: ["vino", "tequila", "cerveza"],
-                datasets: [{
-                    label: 'Tiempo de ejecución',
-                    data: [10, 20, 30], 
-                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe']
-                }]
-            }                
-        });
-    </script>
-    <ul id="list-bussines"></ul>
     <script src="src/controllers/script.js" type="module"></script>
 </body>
 </html>
