@@ -7,37 +7,52 @@
     <title>Algoritmos de Complejidad</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 <body>  
     <div class="all-page">
         <div class="text">
             <h1>Análisis de complejidad</h1>
         </div>
+        <div>
+            <label for="numItems">Número de ítems a procesar:</label>
+            <input type="number" id="numItems" min="1" value="100">
+        </div>
         <div class="box">
-            <button id="addLinkedList-btn">add LinkedList</button>
-            <button id="addArray-btn">add ArrayList</button>
+            <button id="addLinkedList-btn">Add LinkedList</button>
+            <button id="addArray-btn">Add ArrayList</button>
         </div>
         <div class="boxInput-comboBox">
             <div class="box-comboBox">
-                <button id="searchArray-btn">Array</button>
-                <button id="searchLinkedList-btn">LinkedList</button>
+                <button id="searchArray-btn">Search Array</button>
+                <button id="searchLinkedList-btn">Search LinkedList</button>
             </div>
             <div class="box-comboBox">
                 <input type="text" placeholder="Search" id="search-ipt">
             </div>
         </div>
         <div class="btn-ordenamient">
-            <button id="bubbleSort-btn">BubbleArray</button>
-            <button id="mergeSort-btn">MergeArray</button>
-            <button id="radixSort-btn">RadixArray</button>
-            <button id="bubbleSortLinked-btn">BubbleLinked</button>
-            <button id="mergeSortLinked-btn">MergeLinked</button>
-            <button id="radixSortLinked-btn">RadixLinked</button>
+            <button id="bubbleSort-btn">Bubble Array</button>
+            <button id="mergeSort-btn">Merge Array</button>
+            <button id="radixSort-btn">Radix Array</button>
+            <button id="bubbleSortLinked-btn">Bubble Linked</button>
+            <button id="mergeSortLinked-btn">Merge Linked</button>
+            <button id="radixSortLinked-btn">Radix Linked</button>
         </div>
         <div class="grafica">
             <canvas id="MiGrafica" width="1000" height="700"></canvas>
-
+        </div>
+        <div class="tabla">
+            <table id="resultados-tiempos">
+                <thead>
+                    <tr>
+                        <th>Operación</th>
+                        <th>Estructura</th>
+                        <th>Tiempo (segundos)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
     <script src="src/controllers/script.js" type="module"></script>

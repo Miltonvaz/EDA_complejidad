@@ -1,7 +1,7 @@
 export default class Array {
     constructor() {
         this.data = [];
-        this.length = 0; // Agregamos un contador de longitud para mantener un seguimiento de los elementos
+        this.length = 0; 
     }
 
     get(index) {
@@ -9,8 +9,8 @@ export default class Array {
     }
 
     push(value) {
-        this.data.push(value);
-        this.length++; // Incrementamos la longitud después de agregar un elemento
+        this.data[this.length] = value;
+        this.length++;
     }
 
     linearSearch(value) {
